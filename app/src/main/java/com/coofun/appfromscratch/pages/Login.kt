@@ -12,6 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -28,78 +29,87 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.coofun.appfromscratch.component.CustomTopAppBar
 import com.coofun.appfromscratch.ui.theme.Purple700
 
 @Composable
 fun Login(navController: NavController) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        ClickableText(
-            text = AnnotatedString("Signup here"),
-            modifier = Modifier
-                .align(Alignment.Center)
-                .padding(20.dp),
-            onClick = { navController.navigate("signup") },
-            style = TextStyle(
-                fontSize = 14.sp,
-                fontFamily = FontFamily.Default,
-                textDecoration = TextDecoration.Underline,
-                color = Purple700
-            )
-        )
-
-        Column(
-            modifier = Modifier.padding(20.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            val username = remember {
-                mutableStateOf(TextFieldValue())
-            }
-            val password = remember {
-                mutableStateOf(TextFieldValue())
-            }
-
-            Text(
-                text = "Login", style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Cursive)
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            TextField(label = { Text(text = "Username") },
-                value = username.value,
-                onValueChange = { username.value = it })
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            TextField(label = { Text(text = "Password") },
-                value = password.value,
-                onValueChange = { password.value = it },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-            )
-
-            Spacer(modifier = Modifier.height(15.dp))
-
-            Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
-                Button(
-                    onClick = {},
-                    shape = RoundedCornerShape(50.dp),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(50.dp)
-                ) {
-                    Text(text = "Login")
-                }
-            }
-
-            Spacer(modifier = Modifier.height(15.dp))
-
+    Scaffold(topBar = {
+        CustomTopAppBar(navController = navController, title = "Login", showBackIcon = true)
+    }) { padding ->
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(padding)) {
             ClickableText(
-                text = AnnotatedString("Forgot Password?"),
-                onClick = { navController.navigate("forgot-password") },
+                text = AnnotatedString("Signup here"),
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(20.dp),
+                onClick = { navController.navigate("signup") },
                 style = TextStyle(
-                    fontSize = 15.sp, fontFamily = FontFamily.Default
+                    fontSize = 14.sp,
+                    fontFamily = FontFamily.Default,
+                    textDecoration = TextDecoration.Underline,
+                    color = Purple700
                 )
             )
+
+            Column(
+                modifier = Modifier.padding(20.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                val username = remember {
+                    mutableStateOf(TextFieldValue())
+                }
+                val password = remember {
+                    mutableStateOf(TextFieldValue())
+                }
+
+                Text(
+                    text = "Login",
+                    style = TextStyle(fontSize = 40.sp, fontFamily = FontFamily.Cursive)
+                )
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                TextField(label = { Text(text = "Username") },
+                    value = username.value,
+                    onValueChange = { username.value = it })
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                TextField(
+                    label = { Text(text = "Password") },
+                    value = password.value,
+                    onValueChange = { password.value = it },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+                )
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
+                    Button(
+                        onClick = {},
+                        shape = RoundedCornerShape(50.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(50.dp)
+                    ) {
+                        Text(text = "Login")
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(15.dp))
+
+                ClickableText(
+                    text = AnnotatedString("Forgot Password?"),
+                    onClick = { navController.navigate("forgot-password") },
+                    style = TextStyle(
+                        fontSize = 15.sp, fontFamily = FontFamily.Default
+                    )
+                )
+            }
         }
     }
 }
